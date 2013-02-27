@@ -84,7 +84,7 @@ function reduce(db, collection, callback) {
         if(type === "array") {
           var len = doc[field].length;
           var res = result[field]["_$array"]
-          if (len in res) res[len] = 0;
+          if (!(len in res)) res[len] = 0;
           res[len]++;
 
         } else if(type ==="object") {
