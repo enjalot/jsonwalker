@@ -18,7 +18,6 @@ function reduce(db, collection, callback) {
   }
 
   function reduce(k, docs) {
-    // Profiles are already unique so this doesn't actually do anything
     var output = {};
     
     function checkType(value) {
@@ -80,16 +79,17 @@ function reduce(db, collection, callback) {
           result[field] = add(result[field], doc[field]);
           continue;
         }
-
         if(type === "array") {
           var len = doc[field].length;
           var res = result[field]["_$array"]
           if (!(len in res)) res[len] = 0;
           res[len]++;
-
         } else if(type ==="object") {
           result[field]["_$object"] += 1;
+          
+          //result[field]["_$children"] = [];
           walk(doc[field], result[field]);
+
         } else {
           result[field]["_$" + type] += 1;
         }

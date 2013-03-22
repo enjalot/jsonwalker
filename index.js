@@ -10,11 +10,11 @@ var async = require('async');
 
 async.parallel([
   //REPLACE these collections with your own collections
-  walker.reduce(db, "evaluations")
-  ,walker.reduce(db, "profiles")
-  ,walker.reduce(db, "stories")
+  //walker.reduce(db, "profiles")
+  //,walker.reduce(db, "stories")
+  walker.reduce(db, "testimports")
 ],function(err, result) {
-  console.log("all done!");
+  console.log("all done!", err, result);
   db.close();
 })
 //`walker.reduce(db, "stories");
